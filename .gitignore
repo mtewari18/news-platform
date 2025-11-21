@@ -1,0 +1,24 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment
+.env
+backend/.env
+frontend/.env
+
+# Logs
+logs/
+*.log
+
+# Uploads
+backend/uploads/
+
+# Build
+frontend/dist/
+backend/build/
+
+# Docker
+*.pid
+
