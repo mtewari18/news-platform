@@ -1,0 +1,5 @@
+body { font-family: system-ui, Arial, sans-serif; margin:0; color:#222; }
+main { }
+input, textarea, select { width:100%; padding:8px; margin:6px 0 12px; }
+button { padding:8px 12px; cursor:pointer; }
+img { max-width:100%; }
