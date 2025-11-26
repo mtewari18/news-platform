@@ -24,4 +24,12 @@ app.use('/api/admin', require('./routes/admin'));
 
 app.get('/', (req, res) => res.send('News API is running'));
 
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://news-frontend.onrender.com"
+  ],
+  credentials: true
+}));
+
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
