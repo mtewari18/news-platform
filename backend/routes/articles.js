@@ -1,30 +1,31 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const auth = require('../middleware/authMiddleware');
-const upload = require('../middleware/uploadMiddleware');
+const upload = require("../middleware/uploadMiddleware");
+const auth = require("../middleware/authMiddleware");
+
 const {
-  listArticles, getArticle, createArticle, pendingList, approveArticle, rejectArticle, listByCategory
-} = require('../controllers/articleController');
+  createArticle,
+  getArticles,
+  getArticle,
+  updateArticle,
+  deleteArticle,
+  approveArticle,
+  getTrending,
+  getRelated,
+} = require("../controllers/articleController");
 
-router.get('/', listArticles);
-router.get('/pending', auth, async (req, res, next) => {
-  if (req.user.role !== 'admin') return res.status(403).json({ message:'Forbidden' });
-  next();
-}, pendingList);
-router.get('/category/:slug', listByCategory);
+// Public
+router.get("/", getArticles);
+router.get("/trending", getTrending);
+router.get("/related/:id", getRelated);
+router.get("/:slug", getArticle);
 
-router.get('/:slug', getArticle);
+// Private
+router.post("/", auth, upload.single("image"), createArticle);
+router.put("/:id", auth, upload.single("image"), updateArticle);
+router.delete("/:id", auth, deleteArticle);
 
-router.post('/', auth, upload.single('image'), createArticle);
-
-router.put('/:id/approve', auth, async (req, res, next) => {
-  if (req.user.role !== 'admin') return res.status(403).json({ message:'Forbidden' });
-  next();
-}, approveArticle);
-
-router.put('/:id/reject', auth, async (req, res, next) => {
-  if (req.user.role !== 'admin') return res.status(403).json({ message:'Forbidden' });
-  next();
-}, rejectArticle);
+// Admin
+router.post("/:id/approve", auth, approveArticle);
 
 module.exports = router;
