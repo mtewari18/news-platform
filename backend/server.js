@@ -27,7 +27,7 @@ app.get('/', (req, res) => res.send('News API is running'));
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://news-frontend.onrender.com"
+    "https://news-frontend-g8ti.onrender.com"
   ],
   credentials: true
 }));
